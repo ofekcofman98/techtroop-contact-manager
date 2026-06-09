@@ -51,6 +51,14 @@ function printCliHelp(commands) {
         const cmd = commands[key];
         console.log(`  ${key} ${cmd.usage}`.padEnd(30) + ` - ${cmd.explanation}`);
     }
+
+    console.log("\nExamples:");
+    for (const key in commands) {
+        const cmd = commands[key];
+        if (cmd.example) {
+            console.log(`  ${cmd.example}`);
+        }
+    }
 }
 
 function unknownCommand(commandName) {
