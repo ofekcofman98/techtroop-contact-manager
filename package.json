@@ -1,0 +1,13 @@
+{
+  "name": "techtroop-contact-manager",
+  "version": "1.0.0",
+  "description": "A small command-line contact manager.",
+  "main": "contacts.js",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

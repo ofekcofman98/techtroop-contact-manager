@@ -4,29 +4,10 @@
 const { loadContacts, saveContacts } = require('../utils/fileUtils');
 const { validateContact } = require('../utils/validation');
 const { ValidationError, ContactError } = require('../utils/errors');
+const { emailExists, findIndexByEmail, filterByQuery } = require('../utils/contactUtils');
 const ui = require('../utils/ui');
 
 const CONTACTS_FILE = 'contacts.json';
-
-// --- Small pure helpers (case-insensitive) ---
-
-function emailExists(contacts, email) {
-    const target = email.toLowerCase();
-    return contacts.some(contact => contact.email.toLowerCase() === target);
-}
-
-function findIndexByEmail(contacts, email) {
-    const target = email.toLowerCase();
-    return contacts.findIndex(contact => contact.email.toLowerCase() === target);
-}
-
-function filterByQuery(contacts, query) {
-    const needle = query.toLowerCase();
-    return contacts.filter(contact =>
-        contact.name.toLowerCase().includes(needle) ||
-        contact.email.toLowerCase().includes(needle)
-    );
-}
 
 // Loads the file and reports the outcome (loaded N / new list) via the ui.
 function loadAndReport() {
