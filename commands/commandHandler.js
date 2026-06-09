@@ -1,50 +1,6 @@
-const contactService = require('../services/contactService');
+const commands = require('./commandsData');
 
-const commands = {
-    add: {
-        numOfArgs: 3,
-        usage: '"name" "email" "phone"',
-        explanation: "Add a new contact",
-        action: function(args) {
-            const [name, email, phone] = args;
-            contactService.addContact(name, email, phone);
-        }
-    },
-    delete: {
-        numOfArgs: 1,
-        usage: '"email"',
-        explanation: "Delete contact by email",
-        action: function(args) {
-            const [email] = args;
-            contactService.deleteContact(email);
-        }
-    },
-    search: {
-        numOfArgs: 1,
-        usage: '"query"',
-        explanation: "Search contacts by name or email",
-        action: function(args) {
-            const [query] = args;
-            contactService.searchContact(query);
-        }
-    },
-    list: {
-        numOfArgs: 0,
-        usage: "",
-        explanation: "List all contacts",
-        action: function() {
-            contactService.showContacts();
-        }
-    },
-    help: {
-        numOfArgs: 0,
-        usage: "",
-        explanation: "Show this help message",
-        action: function() {
-            printHelp();
-        }
-    }
-};
+commands.help.action = printHelp;
 
 function printHelp() {
     console.log("Usage: node contacts.js [command] [arguments]\n");
