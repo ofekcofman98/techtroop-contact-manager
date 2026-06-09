@@ -1,11 +1,12 @@
 const contactService = require('../services/contactService');
+const ui = require('../utils/ui');
 
 const commands = {
     add: {
         numOfArgs: 3,
         usage: '"name" "email" "phone"',
         explanation: "Add a new contact",
-        action: function(args) {
+        activate: function(args) {
             const [name, email, phone] = args;
             contactService.addContact(name, email, phone);
         }
@@ -14,7 +15,7 @@ const commands = {
         numOfArgs: 1,
         usage: '"email"',
         explanation: "Delete contact by email",
-        action: function(args) {
+        activate: function(args) {
             const [email] = args;
             contactService.deleteContact(email);
         }
@@ -23,7 +24,7 @@ const commands = {
         numOfArgs: 1,
         usage: '"query"',
         explanation: "Search contacts by name or email",
-        action: function(args) {
+        activate: function(args) {
             const [query] = args;
             contactService.searchContact(query);
         }
@@ -32,7 +33,7 @@ const commands = {
         numOfArgs: 0,
         usage: "",
         explanation: "List all contacts",
-        action: function() {
+        activate: function() {
             contactService.showContacts();
         }
     },
@@ -40,8 +41,8 @@ const commands = {
         numOfArgs: 0,
         usage: "",
         explanation: "Show this help message",
-        action: function() {
-            // נשאיר את זה ריק או שנקרא לפונקציה שתוגדר ב-handler
+        activate: function() {
+            ui.printCliHelp(commands);
         }
     }
 };
