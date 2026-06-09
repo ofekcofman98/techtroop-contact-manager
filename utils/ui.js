@@ -44,6 +44,29 @@ function searchResults(query, matches) {
     matches.forEach((contact, i) => console.log(formatRow(contact, i)));
 }
 
+function printCliHelp(commands) {
+    console.log("Usage: node contacts.js [command] [arguments]\n");
+    console.log("Commands:");
+    for (const key in commands) {
+        const cmd = commands[key];
+        console.log(`  ${key} ${cmd.usage}`.padEnd(30) + ` - ${cmd.explanation}`);
+    }
+}
+
+function unknownCommand(commandName) {
+    console.log(`✗ Error: Unknown command '${commandName}'`);
+    console.log("Usage: node contacts.js [add|list|search|delete|help] [arguments]");
+}
+
+function missingArguments(cmdKey, usage) {
+    console.log(`✗ Error: Missing arguments for ${cmdKey} command`);
+    console.log(`Usage: node contacts.js ${cmdKey} ${usage}`);
+}
+
+function printError(message) {
+    console.error(`✗ Error: ${message}`);
+}
+
 module.exports = {
     loading,
     loaded,
@@ -53,4 +76,8 @@ module.exports = {
     saved,
     contactList,
     searchResults,
+    printCliHelp,
+    unknownCommand,  
+    missingArguments,
+    printError
 };

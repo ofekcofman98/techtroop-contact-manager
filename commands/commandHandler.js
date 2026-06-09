@@ -1,20 +1,9 @@
 const commands = require('./commandsData');
-
-commands.help.action = printHelp;
-
-function printHelp() {
-    console.log("Usage: node contacts.js [command] [arguments]\n");
-    console.log("Commands:");
-
-    for (const key in commands) {
-        const cmd = commands[key];
-        console.log(`  ${key} ${cmd.usage}`.padEnd(30) + ` - ${cmd.explanation}`);
-    }
-}
+const ui = require('../utils/ui');
 
 function handleCommand(commandName, args) {
     if (!commandName) {
-        printHelp();
+        ui.printCliHelp(commands);
         return;
     }
 
@@ -22,21 +11,19 @@ function handleCommand(commandName, args) {
     const command = commands[cmdKey];
 
     if (!command) {
-        console.log(`✗ Error: Unknown command '${commandName}'`);
-        console.log("Usage: node contacts.js [add|list|search|delete|help] [arguments]");
-        return;
+        ui.unknownCommand(commandName);
+        return;    
     }
 
     if (args.length < command.numOfArgs) {
-        console.log(`✗ Error: Missing arguments for ${cmdKey} command`);
-        console.log(`Usage: node contacts.js ${cmdKey} ${command.usage}`);
+        ui.missingArguments(cmdKey, command.usage);
         return;
     }
 
     try {
-        command.action(args);
+        command.activate(args);
     } catch (error) {
-        console.error(`✗ Error: ${error.message}`);
+        ui.printError(error.message);
     }
 }
 
