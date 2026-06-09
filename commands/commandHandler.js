@@ -7,6 +7,7 @@ function printHelp() {
     console.log("Commands:");
 
     for (const key in commands) {
+        const cmd = commands[key];
         console.log(`  ${key} ${cmd.usage}`.padEnd(30) + ` - ${cmd.explanation}`);
     }
 }
