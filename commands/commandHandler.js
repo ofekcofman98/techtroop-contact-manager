@@ -1,11 +1,15 @@
-// const commands = {
-//     add: new AddCommand(),
-//     delete: new DeleteCommand(),
-//     search: new SearchCommand(),
-//     list: new ListCommand(),
-//     help: new HelpCommand()
-// };
+const contactService = require('../services/contactService');
 
 
 
-// commands[command].execute(args);
+const commands = {
+    add: new AddCommand(),
+    delete: new DeleteCommand(),
+    search: new SearchCommand(),
+    list: new ListCommand(),
+    help: new HelpCommand()
+};
+
+
+
+// function handleCommand()
